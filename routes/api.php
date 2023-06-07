@@ -7,6 +7,7 @@ use App\Http\Controllers\recepcion\PaquetesController;
 use App\Http\Controllers\catalogos\AreasController;
 use App\Http\Controllers\catalogos\PaqueteriasController;
 use App\Http\Controllers\catalogos\DestinatariosController;
+use App\Http\Controllers\mail\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,9 @@ Route::post('destinatarios/update', [DestinatariosController::class, 'update'])-
 Route::get('paquetes', [PaquetesController::class, 'index'])->name('paquetes');
 Route::post('paquetes/create', [PaquetesController::class, 'store'])->name('paquetes.create');
 Route::post('paquetes/update', [PaquetesController::class, 'update'])->name('paquetes.update');
+
+
+// =====================================================================
+// Email
+// =====================================================================
+Route::post('send-mail', [MailController::class, 'store'])->name('send-mail');
