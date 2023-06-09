@@ -15,11 +15,14 @@ class PaquetesController extends Controller
             'id',
             'numero_de_guia',
             'paqueteria',
-            'tipo',
+            'quien_captura',
             'usuario',
             'correo',
             'area',
             'extension',
+            'empleado_recibe',
+            'fecha_entregado',
+            'status',
         )
         ->where('status', 'RECIBIDO')
         ->get();
@@ -33,6 +36,7 @@ class PaquetesController extends Controller
         PaquetesModel::create([
             'numero_de_guia' => $request->numero_de_guia,
             'paqueteria' => $request->paqueteria,
+            'quien_captura' => $request->quien_captura, // Cambiar a auth
             'tipo' => $request->tipo,
             'usuario' => $request->usuario,
             'correo' => $request->correo,
