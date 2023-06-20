@@ -11,6 +11,7 @@ class AreasController extends Controller
 {
     public function index() {
         $areas = AreasModel::select(
+            'id',
             'area',
         )
         ->get();
@@ -21,12 +22,13 @@ class AreasController extends Controller
     }
 
     public function store(Request $request) {
-        AreasModel::create([
+        $area = AreasModel::create([
             'area' => $request->area,
         ]);
 
         return response([
-            'msg' => '¡Area registrada exitosamente!'
+            'msg' => '¡Area registrada exitosamente!',
+            'data' => $area
         ]);
     }
 

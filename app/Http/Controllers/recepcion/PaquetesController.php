@@ -4,8 +4,10 @@ namespace App\Http\Controllers\recepcion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
+use App\Mail\PaqueteRecibido;
 use App\Models\recepcion\PaquetesModel;
 
 class PaquetesController extends Controller
@@ -25,7 +27,10 @@ class PaquetesController extends Controller
             'status',
         )
         ->where('status', 'RECIBIDO')
+        ->orderBy('id', 'desc')
         ->get();
+
+        // return view('recepcion.dashboard.index', ['paquetes' => $paquetes]);
 
         return response([
             'paquetes' => $paquetes
@@ -33,11 +38,11 @@ class PaquetesController extends Controller
     }
 
     public function store(Request $request) {
-        PaquetesModel::create([
+        $paquete = PaquetesModel::create([
             'numero_de_guia' => $request->numero_de_guia,
             'paqueteria' => $request->paqueteria,
-            'quien_captura' => $request->quien_captura, // Cambiar a auth
-            'tipo' => $request->tipo,
+            'quien_captura' => '$request->quien_captura', // Cambiar a auth
+            // 'tipo' => $request->tipo,
             'usuario' => $request->usuario,
             'correo' => $request->correo,
             'area' => $request->area,
@@ -45,8 +50,21 @@ class PaquetesController extends Controller
             'status' => 'RECIBIDO',
         ]);
 
+        if( $paquete ) {
+            Mail::to('jona.pelo1998@gmail.com')
+            // ->cc('mario_alberto_guerrero@whirlpool.com')
+            // ->cc('jonathan_isai_perez@whirlpool.com')
+            ->send(new PaqueteRecibido());
+
+
+            return response([
+                'msg' => '¡Paquete ingresado exitosamente!',
+                'data' => $paquete
+            ]);
+        }
+
         return response([
-            'msg' => '¡Paquete ingresado exitosamente!',
+            'msg' => 'No se pudo registrar supaquete, revise nuevamente sus datos',
         ]);
     }
 

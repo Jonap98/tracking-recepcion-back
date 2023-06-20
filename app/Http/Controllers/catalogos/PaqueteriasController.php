@@ -11,6 +11,7 @@ class PaqueteriasController extends Controller
 {
     public function index() {
         $paqueterias = PaqueteriasModel::select(
+            'id',
             'paqueteria',
         )
         ->get();
@@ -21,12 +22,13 @@ class PaqueteriasController extends Controller
     }
 
     public function store(Request $request) {
-        PaqueteriasModel::create([
+        $paqueteria = PaqueteriasModel::create([
             'paqueteria' => $request->paqueteria,
         ]);
 
         return response([
-            'msg' => '¡Paquetería registrada exitosamente!'
+            'msg' => '¡Paquetería registrada exitosamente!',
+            'data' => $paqueteria
         ]);
     }
 

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\recepcion\PaquetesController;
+
 use App\Http\Controllers\mail\MailController;
 
 /*
@@ -21,3 +23,12 @@ Route::get('/', function () {
 
 
 Route::get('preview', [MailController::class, 'index'])->name('preview');
+
+Route::get('recepcion/dashboard', [PaquetesController::class, 'index'])->name('recepcion.dashboard');
+
+
+
+
+
+
+

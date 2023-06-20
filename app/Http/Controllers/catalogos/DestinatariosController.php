@@ -11,6 +11,7 @@ class DestinatariosController extends Controller
 {
     public function index() {
         $destinatarios = DestinatariosModel::select(
+            'id',
             'nombre',
             'correo',
             'area',
@@ -30,7 +31,8 @@ class DestinatariosController extends Controller
         ]);
 
         return response([
-            'msg' => '¡Destinatario registrado exitosamente!'
+            'msg' => '¡Destinatario registrado exitosamente!',
+            'data' => $destinatario
         ]);
     }
 
