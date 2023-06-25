@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('numero_de_guia');
             $table->string('paqueteria');
             $table->string('quien_captura');
-            $table->string('usuario');
+            $table->string('usuario'); // Destinatario
             $table->string('correo');
             $table->string('area');
             $table->string('extension')->nullable();

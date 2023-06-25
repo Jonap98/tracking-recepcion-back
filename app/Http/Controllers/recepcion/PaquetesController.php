@@ -37,6 +37,32 @@ class PaquetesController extends Controller
         ]);
     }
 
+    public function filters(Request $request) {
+        $paquetes = PaquetesModel::select(
+            'id',
+            'numero_de_guia',
+            'paqueteria',
+            'quien_captura',
+            'usuario',
+            'correo',
+            'area',
+            'extension',
+            'empleado_recibe',
+            'fecha_entregado',
+            'status',
+        );
+
+        if( $request->status ) {
+            $paquetes = $paquetes->where('status', $request->status);
+        }
+
+        $paquetes = $paquetes->orderBy('id', 'desc')->get();
+
+        return response([
+            'paquetes' => $paquetes
+        ]);
+    }
+
     public function store(Request $request) {
         $paquete = PaquetesModel::create([
             'numero_de_guia' => $request->numero_de_guia,
@@ -69,6 +95,10 @@ class PaquetesController extends Controller
     }
 
     public function update(Request $request) {
+        $actual = PaquetesModel::where(
+            'id', $request->id
+        )->first();
+
         PaquetesModel::where(
             'id', $request->id
         )
@@ -80,6 +110,7 @@ class PaquetesController extends Controller
 
         return response([
             'msg' => '¡Paquete recibido exitosamente!',
+            'data' => $actual
         ]);
     }
 }
