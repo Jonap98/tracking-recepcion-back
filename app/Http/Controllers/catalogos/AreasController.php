@@ -40,8 +40,14 @@ class AreasController extends Controller
             'area' => $request->area
         ]);
 
+        $area = AreasModel::where(
+            'id', $request->id
+        )
+        ->first();
+
         return response([
-            'msg' => '¡Area actualizada exitosamente!'
+            'msg' => '¡Area actualizada exitosamente!',
+            'area' => $area
         ]);
     }
 }

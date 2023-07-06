@@ -166,7 +166,8 @@
 				</li>
 			</ul>
 			<div class="action">
-			<a class="button" href="http://10.40.129.40:99">
+			{{-- <a class="button" href="http://10.40.129.40:99"> --}}
+            <a class="button" href="http://localhost:4200/recepcion/dashboard/home">
 				Ver detalles
 			</a>
 			</div>

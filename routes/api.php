@@ -64,6 +64,7 @@ Route::get('paquetes', [PaquetesController::class, 'index'])->name('paquetes');
 Route::post('paquetes/filters', [PaquetesController::class, 'filters'])->name('paquetes.filters');
 Route::post('paquetes/create', [PaquetesController::class, 'store'])->name('paquetes.create');
 Route::post('paquetes/update', [PaquetesController::class, 'update'])->name('paquetes.update');
+Route::post('paquetes/update-fields', [PaquetesController::class, 'updateFields'])->name('paquetes.update-fields');
 
 
 // =====================================================================
@@ -76,3 +77,5 @@ Route::post('send-mail', [MailController::class, 'store'])->name('send-mail');
 // =====================================================================
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::get('usuarios', [AuthController::class, 'getUsers'])->name('usuarios');
+Route::post('usuarios/update', [AuthController::class, 'update'])->name('usuarios.update');

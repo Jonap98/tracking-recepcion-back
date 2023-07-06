@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UsuariosTarjetaModel extends Model
 {
     use HasFactory;
-    protected $table = 'RECEPCION_usuarios_tarjeta';
+    protected $table = 'LOBBY_usuarios_tarjeta';
     protected $fillable = [
         'numero_tarjeta',
         'nombre',

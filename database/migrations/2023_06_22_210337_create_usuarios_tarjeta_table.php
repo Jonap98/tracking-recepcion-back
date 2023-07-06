@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('numero_tarjeta');
             $table->string('nombre');
+            $table->string('usuario_id');
             $table->timestamps();
         });
     }

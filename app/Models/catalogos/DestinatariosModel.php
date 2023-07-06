@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DestinatariosModel extends Model
 {
     use HasFactory;
-    protected $table = 'RECEPCION_destinatarios';
+    protected $table = 'LOBBY_destinatarios';
     protected $fillable = [
         'nombre',
         'correo',

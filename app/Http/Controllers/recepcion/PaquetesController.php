@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 use App\Mail\PaqueteRecibido;
 use App\Models\recepcion\PaquetesModel;
+use App\Models\catalogos\DestinatariosModel;
 
 class PaquetesController extends Controller
 {
@@ -29,8 +30,6 @@ class PaquetesController extends Controller
         ->where('status', 'RECIBIDO')
         ->orderBy('id', 'desc')
         ->get();
-
-        // return view('recepcion.dashboard.index', ['paquetes' => $paquetes]);
 
         return response([
             'paquetes' => $paquetes
@@ -67,8 +66,7 @@ class PaquetesController extends Controller
         $paquete = PaquetesModel::create([
             'numero_de_guia' => $request->numero_de_guia,
             'paqueteria' => $request->paqueteria,
-            'quien_captura' => '$request->quien_captura', // Cambiar a auth
-            // 'tipo' => $request->tipo,
+            'quien_captura' => $request->quien_captura,
             'usuario' => $request->usuario,
             'correo' => $request->correo,
             'area' => $request->area,
@@ -77,11 +75,21 @@ class PaquetesController extends Controller
         ]);
 
         if( $paquete ) {
-            Mail::to('jona.pelo1998@gmail.com')
-            // ->cc('mario_alberto_guerrero@whirlpool.com')
-            // ->cc('jonathan_isai_perez@whirlpool.com')
-            ->send(new PaqueteRecibido());
+            $destinatarios = DestinatariosModel::select(
+                'correo'
+            )
+            ->where('area', $request->area)
+            ->get();
 
+            $query = Mail::to($request->correo);
+
+            $ccEmails = [];
+            foreach ($destinatarios as $destinatario) {
+                array_push($ccEmails, $destinatario->correo);
+            }
+            $query = $query->cc($ccEmails);
+
+            $query = $query->send(new PaqueteRecibido());
 
             return response([
                 'msg' => '¡Paquete ingresado exitosamente!',
@@ -91,6 +99,25 @@ class PaquetesController extends Controller
 
         return response([
             'msg' => 'No se pudo registrar supaquete, revise nuevamente sus datos',
+        ]);
+    }
+
+    public function updateFields(Request $request) {
+        PaquetesModel::where(
+            'id', $request->id
+        )
+        ->update([
+            'numero_de_guia' => $request->numero_de_guia,
+            'paqueteria' => $request->paqueteria,
+            'quien_captura' => $request->quien_captura,
+            'usuario' => $request->usuario,
+            'correo' => $request->correo,
+            'area' => $request->area,
+            'extension' => $request->extension,
+        ]);
+
+        return response([
+            'msg' => '¡Paquete actualizado exitosamente!'
         ]);
     }
 
@@ -109,7 +136,7 @@ class PaquetesController extends Controller
         ]);
 
         return response([
-            'msg' => '¡Paquete recibido exitosamente!',
+            'msg' => '¡Paquete entregado exitosamente!',
             'data' => $actual
         ]);
     }

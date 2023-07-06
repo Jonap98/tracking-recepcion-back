@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AreasModel extends Model
 {
     use HasFactory;
-    protected $table = 'RECEPCION_areas';
+    protected $table = 'LOBBY_areas';
     protected $fillable = [
         'area',
     ];
