@@ -142,17 +142,15 @@
 <body>
     <div class="plan">
 		<div class="inner">
-			<p class="title">¡Usted ha recibido un paquete!</p>
+			<p class="title">¡Ha llegado un paquete sin información!</p>
             <p class="info">Número de guía: <strong>{{ $numero_de_guia }}</strong></p>
-            <p class="info">Usuario destino: <strong>{{ $usuario }}</strong> </p>
-			<p class="info">Porfavor pase a recogerlo a recepción en oficinas generales.</p>
+			<p class="info">Si es de su área, por favor pase a recogerlo a recepción en oficinas generales.</p>
 			<ul class="features">
 				<li>
 					<span class="info"><strong>No</strong> olvide su gafet de acceso</span>
 				</li>
 			</ul>
 			<div class="action">
-			{{-- <a class="button" href="http://10.40.129.40:99"> --}}
             <a class="button" href="http://localhost:4200/recepcion/dashboard/home">
 				Ver detalles
 			</a>
@@ -161,7 +159,7 @@
 	</div>
     <hr class="footer-row">
 
-    <span class="footer-info">Esta es una notificación automática del sistema Lobby system</span>
+    <span class="footer-info">Esta es una notificación automática del sistema Lobby System</span>
     <span class="footer-info">Desarrollada por Materiales</span>
     <span class="footer-info">
         <a href="mailto:jonathan_isai_perez@whirlpool.com,mario_alberto_guerrero@whirlpool.com">Contacto</a>

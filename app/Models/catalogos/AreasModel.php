@@ -11,5 +11,7 @@ class AreasModel extends Model
     protected $table = 'LOBBY_areas';
     protected $fillable = [
         'area',
+        'created_at',
+        'updated_at'
     ];
 }

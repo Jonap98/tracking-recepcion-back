@@ -13,5 +13,7 @@ class DestinatariosModel extends Model
         'nombre',
         'correo',
         'area',
+        'created_at',
+        'updated_at'
     ];
 }

@@ -11,5 +11,7 @@ class PaqueteriasModel extends Model
     protected $table = 'LOBBY_paqueterias';
     protected $fillable = [
         'paqueteria',
+        'created_at',
+        'updated_at'
     ];
 }

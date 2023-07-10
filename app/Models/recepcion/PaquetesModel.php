@@ -21,5 +21,7 @@ class PaquetesModel extends Model
         'empleado_recibe',
         'fecha_entregado',
         'status',
+        'created_at',
+        'updated_at'
     ];
 }
