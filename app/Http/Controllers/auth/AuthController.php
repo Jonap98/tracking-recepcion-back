@@ -20,8 +20,9 @@ class AuthController extends Controller
             'name',
             'email',
             'password',
+            'role',
         )
-        ->where('role', 'Lobby-admin')
+        ->whereIn('role', ['Lobby-admin', 'Lobby-user'])
         ->get();
 
         return response([
@@ -48,6 +49,7 @@ class AuthController extends Controller
         $user = User::select(
             'name',
             'email',
+            'role',
         )
         ->where('email', $request->email)
         ->first();
@@ -101,7 +103,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => 'LOBBY-admin',
+            'role' => $request->admin ? 'LOBBY-admin' : 'LOBBY-user',
             'active' => 'Y',
             'password' => Hash::make($request->password),
         ]);
@@ -118,13 +120,15 @@ class AuthController extends Controller
         )
         ->update([
             'name' => $request->name,
-            'email' => $request->email
+            'email' => $request->email,
+            'role' => $request->role,
         ]);
 
         $usuario = User::select(
             'id',
             'name',
             'email',
+            'role',
         )
         ->where('id', $request->id)
         ->first();
